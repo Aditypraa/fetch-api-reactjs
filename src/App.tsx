@@ -1,13 +1,12 @@
-import LoginPage from "./pages/login"
-import RegisterPage from "./pages/register"
+import { BrowserRouter } from "react-router-dom"
+import AppRoutes from "./routes"
 
 function App() {
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      {/* <LoginPage /> */}
-      <RegisterPage />
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
 
