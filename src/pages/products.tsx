@@ -1,38 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import Button from "../components/Elements/Button"
 import CardProduct from "../components/Fragments/CardProduct"
+import { getData } from "../utils/fetch"
 
-const dataProducts = [
-    {
-        id: 1,
-        title: "Laptop",
-        price: 6000000,
-        images: "images/laptop.avif",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente adipisci eius quod qui ea sunt placeat tempora obcaecati itaque perspiciatis. Obcaecati, nostrum ipsam. Labore minus dignissimos harum veritatis ducimus distinctio!"
-    },
-    {
-        id: 2,
-        title: "Smartphone",
-        price: 4000000,
-        images: "images/laptop.avif",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente adipisci eius quod qui ea sunt placeat tempora obcaecati itaque perspiciatis. Obcaecati, nostrum ipsam. Labore minus dignissimos harum veritatis ducimus distinctio!"
-    },
-    {
-        id: 3,
-        title: "Headset",
-        price: 1000000,
-        images: "images/laptop.avif",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente adipisci eius quod qui ea sunt placeat tempora obcaecati itaque perspiciatis. Obcaecati, nostrum ipsam. Labore minus dignissimos harum veritatis ducimus distinctio!"
-    },
-    {
-        id: 4,
-        title: "Keyboard",
-        price: 500000,
-        images: "images/laptop.avif",
-        description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente adipisci eius quod qui ea sunt placeat tempora obcaecati itaque perspiciatis. Obcaecati, nostrum ipsam. Labore minus dignissimos harum veritatis ducimus distinctio!"
-    }
-
-]
 
 const email = localStorage.getItem("email")
 
@@ -41,13 +11,30 @@ function ProductsPage() {
         id: number;
         qty: number;
     }
+    interface Product {
+        id: number;
+        title: string;
+        description: string;
+        price: number;
+        image: string;
+    }
 
     const [card, setCard] = useState<CardItem[]>([]); // State untuk menyimpan item yang ada di card
     const [totalPrice, setTotalPrice] = useState(0); // State untuk menyimpan total harga
+    const [dataProducts, setDataProducts] = useState<Product[]>([]); // State untuk menyimpan data products
 
     // Load card from local storage
     useEffect(() => {
         setCard(JSON.parse(localStorage.getItem("card") || "[]"))
+    }, [])
+
+    // Load data products from API
+    useEffect(() => {
+        getData("/products").then((data) => {
+            setDataProducts(data)
+        }).catch((error) => {
+            console.error(error)
+        })
     }, [])
 
     // Update total price when card changes
@@ -60,7 +47,7 @@ function ProductsPage() {
             setTotalPrice(total)
             localStorage.setItem("card", JSON.stringify(card))
         }
-    }, [card])
+    }, [card, dataProducts])
 
     // Implement event handler for logout button
     const handleLogout = () => {
@@ -100,7 +87,7 @@ function ProductsPage() {
                 <div className="flex flex-wrap w-4/6">
                     {dataProducts.map((product) => (
                         <CardProduct key={product.id}>
-                            <CardProduct.Header images={product.images} />
+                            <CardProduct.Header images={product.image} />
                             <CardProduct.Content title={product.title}>
                                 {product.description}
                             </CardProduct.Content>

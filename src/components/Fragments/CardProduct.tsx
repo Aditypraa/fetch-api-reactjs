@@ -11,7 +11,7 @@ function CardProduct({ children }: { children: React.ReactNode }) {
 const Header = ({ images }: { images: string }) => {
     return (
         <a href="#">
-            <img src={images} className="p-8 rounded-t-lg" alt={images} />
+            <img src={images} className="p-8 rounded-t-lg h-60 w-full object-cover" alt={images} />
         </a>
     )
 }
@@ -23,7 +23,7 @@ const Content = ({ title, children }: { title: string, children: React.ReactNode
                 <h5 className="text-xl font-semibold tracking-tight text-white">
                     {title}
                 </h5>
-                <p className="text-sm text-white">{children}</p>
+                <p className="text-sm text-white">{children?.toString().substring(0, 100)}</p>
             </a>
         </div>
     )
