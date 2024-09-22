@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Button from "../components/Elements/Button"
 import CardProduct from "../components/Fragments/CardProduct"
 
@@ -77,6 +77,18 @@ function ProductsPage() {
         }
     }
 
+    // Menambahkan ref ke element total price untuk mengatur display none ketika card kosong
+    const totalPriceRef = useRef<HTMLTableRowElement>(null) // Ref bisa digunakan untuk mengakses element HTML atau manipulasi DOM seperti di JavaScript biasa
+    useEffect(() => {
+        if (totalPriceRef.current) {
+            if (card.length > 0) {
+                totalPriceRef.current.style.display = "table-row"
+            } else {
+                totalPriceRef.current.style.display = "none"
+            }
+        }
+    }, [card])
+
     return (
         <>
             <div className="flex justify-end items-center h-20 bg-violet-500 text-white px-10">
@@ -121,7 +133,7 @@ function ProductsPage() {
                                     </tr>
                                 ) : null
                             })}
-                            <tr>
+                            <tr ref={totalPriceRef}> {/* Menambahkan ref ke element */}
                                 <td colSpan={3}>Total Price</td>
                                 <td>{totalPrice.toLocaleString("id-ID", { style: 'currency', currency: 'IDR' })}</td>
                             </tr>
