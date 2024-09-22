@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../components/Elements/Button"
 import CardProduct from "../components/Fragments/CardProduct"
 
@@ -37,12 +37,30 @@ const dataProducts = [
 const email = localStorage.getItem("email")
 
 function ProductsPage() {
-    const [card, setCard] = useState([
-        {
-            id: 1,
-            qty: 1
+    interface CardItem {
+        id: number;
+        qty: number;
+    }
+
+    const [card, setCard] = useState<CardItem[]>([]); // State untuk menyimpan item yang ada di card
+    const [totalPrice, setTotalPrice] = useState(0); // State untuk menyimpan total harga
+
+    // Load card from local storage
+    useEffect(() => {
+        setCard(JSON.parse(localStorage.getItem("card") || "[]"))
+    }, [])
+
+    // Update total price when card changes
+    useEffect(() => {
+        if (card.length > 0) {
+            const total = card.reduce((acc, item) => {
+                const product = dataProducts.find((product) => product.id === item.id)
+                return acc + (product ? product.price * item.qty : 0)
+            }, 0)
+            setTotalPrice(total)
+            localStorage.setItem("card", JSON.stringify(card))
         }
-    ])
+    }, [card])
 
     // Implement event handler for logout button
     const handleLogout = () => {
@@ -103,6 +121,10 @@ function ProductsPage() {
                                     </tr>
                                 ) : null
                             })}
+                            <tr>
+                                <td colSpan={3}>Total Price</td>
+                                <td>{totalPrice.toLocaleString("id-ID", { style: 'currency', currency: 'IDR' })}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
