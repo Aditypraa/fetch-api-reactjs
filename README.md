@@ -1,50 +1,103 @@
-# React + TypeScript + Vite
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/3b44506e-cb21-41c6-80ca-d6e387295ca5" width="150"> 
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h1 align="center">Fetch Api React</h1>
 
-Currently, two official plugins are available:
+Selamat datang di project yang bernama Fetch Api menggunakan React, TypeScript dan Vite. Project ini mengimplementasi beberapa kebutuhan seperti berikut :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- fetch Data dari external API (https://fakestoreapi.com)
+- Penerapan Atomic Design
+- Conditional Rendering
+- Reusable Component
+- Reactivity
+- Routing (Auth)
+- eslint
+- TailwindCss
+- TypeScript
 
-## Expanding the ESLint configuration
+## 🚀 Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Cloning
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+git clone https://github.com/Aditypraa/fetch-api-reactjs
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Masuk Ke Project
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+cd fetch-api-reactjs
+```
+
+Install project with yarn
+
+```
+yarn install
+```
+
+Buat .env.development atau gunakan env bawaan project
+
+```
+touch .env.development
+```
+
+Jalankan Project
+
+```
+yarn dev
+```
+
+## 🗄️ Environment Variables
+
+Untuk menjalankan proyek ini, Anda perlu menambahkan variabel lingkungan berikut ini ke berkas .env
+
+`VITE_API_URL`
+
+Karena project ini sudah ada file .env anda tidak perlu melakukan hal tersebut anda bisa langsung menjalankan project tersebut di computer kalian
+
+## 🧑‍🦰 Username dan Password
+
+Anda Bisa mencoba masuk menggunakan username dan password berikut
+
+Username
+
+```
+johnd
+```
+
+Password
+
+```
+m38rmF$
+```
+
+## 🏃‍♂️‍➡️ Cara Menjalankan Eslint
+
+Jika anda mengupdate atau telah selesai melakukan pembaruan code jangan lupa untuk menjalankan eslint agar code rebih rapi dan nantinya ketika di push di github tidak menyulitkan reviewer dikarenakan perubahan code karna formater dan style code yang berbeda
+
+Pengecekkan File yang stylenya tidak sesuai
+
+```bash
+yarn lint
+```
+
+Memformat File secara Otomatis
+
+```bash
+yarn lint-fix
+```
+
+## Tech Stack
+
+**Client:** React, TypeScript, TailwindCss
+
+**API:** https://fakestoreapi.com
+
+## Authors
+
+- [@aditypraa](https://www.github.com/aditypraa)
+
+## Feedback
+
+If you have any feedback, please reach out to us at aditypraa@gmail.com
