@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import Button from "../components/Elements/Button"
 import CardProduct from "../components/Fragments/CardProduct"
-import { getData } from "../utils/fetch"
+import { getData, getUsername } from "../utils/fetch"
 
-
-const email = localStorage.getItem("email")
 
 function ProductsPage() {
     interface CardItem {
@@ -22,10 +20,20 @@ function ProductsPage() {
     const [card, setCard] = useState<CardItem[]>([]); // State untuk menyimpan item yang ada di card
     const [totalPrice, setTotalPrice] = useState(0); // State untuk menyimpan total harga
     const [dataProducts, setDataProducts] = useState<Product[]>([]); // State untuk menyimpan data products
+    const [username, setUsername] = useState<string | null>(null)
 
     // Load card from local storage
     useEffect(() => {
         setCard(JSON.parse(localStorage.getItem("card") || "[]"))
+    }, [])
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        if (token) {
+            setUsername(getUsername(token))
+        } else {
+            window.location.href = "/"
+        }
     }, [])
 
     // Load data products from API
@@ -51,8 +59,7 @@ function ProductsPage() {
 
     // Implement event handler for logout button
     const handleLogout = () => {
-        localStorage.removeItem("email")
-        localStorage.removeItem("password")
+        localStorage.removeItem("token")
         window.location.href = "/"
     }
 
@@ -79,7 +86,7 @@ function ProductsPage() {
     return (
         <>
             <div className="flex justify-end items-center h-20 bg-violet-500 text-white px-10">
-                {email}
+                {username}
                 <Button type="button" className="ml-5 bg-black" onClick={handleLogout}>Logout</Button>
             </div>
 
