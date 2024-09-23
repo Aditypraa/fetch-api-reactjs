@@ -37,13 +37,16 @@ function ProductsPage() {
 
   // Load data products from API
   useEffect(() => {
-    getData("/products")
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const data = await getData("/products");
         setDataProducts(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+
+    fetchData(); // Panggil fungsi asinkron
   }, []);
 
   // Update total price when card changes
@@ -152,7 +155,6 @@ function ProductsPage() {
                 ) : null;
               })}
               <tr ref={totalPriceRef}>
-                {" "}
                 {/* Menambahkan ref ke element */}
                 <td colSpan={3}>Total Price</td>
                 <td>

@@ -16,10 +16,13 @@ export const getUsername = (token: string) => {
 export const getData = async (url: string) => {
   try {
     const response = await axios.get(`${configs.apiUrl}${url}`);
-    console.log(response.data);
     return response.data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      throw error.response?.data || error.message; // Lempar error untuk penanganan di luar
+    } else {
+      throw error; // Lempar error untuk penanganan di luar
+    }
   }
 };
 
