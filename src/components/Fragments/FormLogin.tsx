@@ -2,11 +2,13 @@ import InputForm from "../Elements/InputForm";
 import Button from "../Elements/Button";
 import { useEffect, useRef, useState } from "react";
 import { postData } from "../../utils/fetch";
+import { useNavigate } from "react-router-dom";
 
 function FormLogin() {
   const [loginFailed, setLoginFailed] = useState<string | null>(null);
   // Implementasi useRef agar cursor langsung fokus ke input username
   const usernameRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (usernameRef.current) {
@@ -39,8 +41,9 @@ function FormLogin() {
       localStorage.setItem("token", response.token); // response.token harus sesuai dengan API respons
       localStorage.setItem("email", response.username); // response.username harus sesuai dengan API respons
 
-      // Redirect user ke halaman produk
-      window.location.href = "/products";
+      // Redirect user ke halaman produk menggunakan navigate
+      // kenapa dia menggunakan navigate : karena dia berada di dalam action / event atau function yang berada di dalam component
+      navigate("/products");
     } catch (error: unknown) {
       // Jika login gagal, tampilkan error ke user
       console.error("Login failed:", error);
