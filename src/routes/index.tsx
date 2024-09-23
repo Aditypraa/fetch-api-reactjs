@@ -6,12 +6,12 @@ import ProductsPage from "../pages/products";
 // import { AdminsRoute } from "./AdminsRoute";
 
 export default function AppRoutes() {
-    return (
-        <Routes>
-            <Route path="/" element={<LoginPage />} errorElement={<ErrorPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            {/* <Route path="admins/*" element={<AdminsRoute />} /> */}
-        </Routes>
-    )
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} errorElement={<ErrorPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/products" element={<ProductsPage />} />
+      {/* <Route path="admins/*" element={<AdminsRoute />} /> */}
+    </Routes>
+  );
 }
