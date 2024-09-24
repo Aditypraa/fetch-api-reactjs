@@ -18,7 +18,7 @@ Selamat datang di project yang bernama Fetch Api menggunakan React, TypeScript d
 
 ## Demo
 
-Link Website : https://fetch-api-reactjs-9qpoj5tub-aditypraas-projects.vercel.app/
+Link Website : https://fetch-api-reactjs-kohl.vercel.app
 
 ## 🚀 Installation
 
