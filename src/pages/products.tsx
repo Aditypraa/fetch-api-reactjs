@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../components/Elements/Button";
 import CardProduct from "../components/Fragments/CardProduct";
-import { getData, getUsername } from "../utils/fetch";
+import { getData } from "../utils/fetch";
+import useLogin from "../hooks/useLogin";
 
 function ProductsPage() {
   interface CardItem {
@@ -19,21 +20,26 @@ function ProductsPage() {
   const [card, setCard] = useState<CardItem[]>([]); // State untuk menyimpan item yang ada di card
   const [totalPrice, setTotalPrice] = useState(0); // State untuk menyimpan total harga
   const [dataProducts, setDataProducts] = useState<Product[]>([]); // State untuk menyimpan data products
-  const [username, setUsername] = useState<string | null>(null);
+
+  // sebelum menggunakan custom hook useLogin
+  // const [username, setUsername] = useState<string | null>(null);
+
+  const { username } = useLogin(); // Menggunakan custom hook useLogin
 
   // Load card from local storage
   useEffect(() => {
     setCard(JSON.parse(localStorage.getItem("card") || "[]"));
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setUsername(getUsername(token));
-    } else {
-      window.location.href = "/";
-    }
-  }, []);
+  // sebelum menggunakan custom hook useLogin
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setUsername(getUsername(token));
+  //   } else {
+  //     window.location.href = "/";
+  //   }
+  // }, []);
 
   // Load data products from API
   useEffect(() => {
@@ -95,7 +101,7 @@ function ProductsPage() {
   return (
     <>
       <div className="flex justify-end items-center h-20 bg-violet-500 text-white px-10">
-        {username}
+        {username && <span>{username}</span>}
         <Button type="button" className="ml-5 bg-black" onClick={handleLogout}>
           Logout
         </Button>

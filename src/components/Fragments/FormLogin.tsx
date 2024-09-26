@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function FormLogin() {
   const [loginFailed, setLoginFailed] = useState<string | null>(null);
-  // Implementasi useRef agar cursor langsung fokus ke input username
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null); // Implementasi useRef agar cursor langsung fokus ke input username
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,8 +26,8 @@ function FormLogin() {
     // window.location.href = "/products"
 
     // Implementasi fetch untuk login
-    // Ambil data login dari form
     const data = {
+      // Data yang akan dikirim ke API
       username: (event.target as HTMLFormElement).username.value, // Tipe HTMLFormElement agar tidak ada error
       password: (event.target as HTMLFormElement).password.value,
     };
