@@ -4,6 +4,7 @@ import RegisterPage from "../pages/register";
 import ErrorPage from "../pages/errorPage";
 import ProductsPage from "../pages/products";
 import ProfilePage from "../pages/profile";
+import DetailProduct from "../pages/detailProduct";
 // import { AdminsRoute } from "./AdminsRoute";
 
 export default function AppRoutes() {
@@ -11,8 +12,12 @@ export default function AppRoutes() {
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+
       <Route path="/products" element={<ProductsPage />} />
+      <Route path="/products/:id" element={<DetailProduct />} />
+
       <Route path="/profile" element={<ProfilePage />} />
+
       {/* <Route path="admins/*" element={<AdminsRoute />} /> */}
       <Route path="*" element={<ErrorPage />} />
     </Routes>

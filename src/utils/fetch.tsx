@@ -26,6 +26,36 @@ export const getData = async (url: string) => {
   }
 };
 
+// menggunakan callback
+export const getDataById = (
+  url: string,
+  id: number,
+  callback: (data: any) => void,
+) => {
+  axios
+    .get(`${configs.apiUrl}${url}/${id}`)
+    .then((response) => {
+      callback(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+// menggunakan async await
+// export const getDataById = async (url: string, id: number) => {
+//   try {
+//     const response = await axios.get(`${configs.apiUrl}${url}/${id}`);
+//     return response.data;
+//   } catch (error: unknown) {
+//     if (axios.isAxiosError(error)) {
+//       throw error.response?.data || error.message; // Lempar error untuk penanganan di luar
+//     } else {
+//       throw error; // Lempar error untuk penanganan di luar
+//     }
+//   }
+// };
+
 export const postData = async (url: string, data: unknown) => {
   try {
     const response = await axios.post(`${configs.apiUrl}${url}`, data);

@@ -111,7 +111,7 @@ function ProductsPage() {
         <div className="flex flex-wrap w-4/6">
           {dataProducts.map((product) => (
             <CardProduct key={product.id}>
-              <CardProduct.Header images={product.image} />
+              <CardProduct.Header images={product.image} id={product.id} />
               <CardProduct.Content title={product.title}>
                 {product.description}
               </CardProduct.Content>
